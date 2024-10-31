@@ -22,11 +22,11 @@ class Jaroncito_ElementAddons_Jaroncito_Product_Image_Gallery_Widget extends \El
     }
 
     public function get_script_depends() {
-        return [ 'swiper-js', 'product-gallery-js' ];
+        return [ 'swiper-js', 'jaroncito-product-gallery-js' ];
     }
 
     public function get_style_depends() {
-        return [ 'swiper-css', 'product-gallery-css' ];
+        return [ 'swiper-css', 'jaroncito-product-gallery-css' ];
     }
 
     protected function register_controls() {
