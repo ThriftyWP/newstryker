@@ -44,8 +44,29 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-        // Lightbox functionality
+    // Add navigation button functionality for main image (MOVED OUTSIDE LIGHTBOX)
+    const nextButton = document.querySelector('.swiper-button-next');
+    const prevButton = document.querySelector('.swiper-button-prev');
     const mainImage = document.querySelector('.jaroncito-main-product-image');
+    const thumbnails = Array.from(document.querySelectorAll('.jaroncito-gallery-item img'));
+    let currentMainIndex = 0;
+
+    // Add main image to the beginning of images array
+    const allImages = [mainImage, ...thumbnails];
+
+    if (nextButton && prevButton && mainImage) {
+        nextButton.addEventListener('click', () => {
+            currentMainIndex = (currentMainIndex + 1) % allImages.length;
+            mainImage.src = allImages[currentMainIndex].src;
+        });
+
+        prevButton.addEventListener('click', () => {
+            currentMainIndex = (currentMainIndex - 1 + allImages.length) % allImages.length;
+            mainImage.src = allImages[currentMainIndex].src;
+        });
+    }
+
+    // Lightbox functionality
     if (mainImage && mainImage.dataset.lightbox === 'yes') {
         mainImage.addEventListener('click', function() {
             const lightbox = document.createElement('div');
@@ -58,27 +79,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     <button class="lightbox-close">&times;</button>
                 </div>
             `;
-
-            const nextButton = document.querySelector('.swiper-button-next');
-            const prevButton = document.querySelector('.swiper-button-prev');
-            const mainImage = document.querySelector('.jaroncito-main-product-image');
-            const thumbnails = Array.from(document.querySelectorAll('.jaroncito-gallery-item img'));
-            let currentMainIndex = 0;
-
-            // Add main image to the beginning of images array
-            const allImages = [mainImage, ...thumbnails];
-
-            if (nextButton && prevButton && mainImage) {
-                nextButton.addEventListener('click', () => {
-                    currentMainIndex = (currentMainIndex + 1) % allImages.length;
-                    mainImage.src = allImages[currentMainIndex].src;
-                });
-
-                prevButton.addEventListener('click', () => {
-                    currentMainIndex = (currentMainIndex - 1 + allImages.length) % allImages.length;
-                    mainImage.src = allImages[currentMainIndex].src;
-                });
-            }
 
             document.body.appendChild(lightbox);
 
@@ -130,4 +130,3 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
-
