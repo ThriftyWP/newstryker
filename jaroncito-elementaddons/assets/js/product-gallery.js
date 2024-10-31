@@ -61,17 +61,19 @@ document.addEventListener('DOMContentLoaded', function() {
             document.body.appendChild(lightbox);
             
             // Handle navigation
-            const images = Array.from(document.querySelectorAll('.jaroncito-gallery-thumbnail'));
+            const images = Array.from(document.querySelectorAll('.jaroncito-gallery-item img')).map(img => img.src);
             let currentIndex = parseInt(this.dataset.index);
+
+            images.unshift(mainImage.src);
             
             lightbox.querySelector('.lightbox-next').addEventListener('click', () => {
                 currentIndex = (currentIndex + 1) % images.length;
-                lightbox.querySelector('img').src = images[currentIndex].src;
+                lightbox.querySelector('img').src = images[currentIndex];
             });
             
             lightbox.querySelector('.lightbox-prev').addEventListener('click', () => {
                 currentIndex = (currentIndex - 1 + images.length) % images.length;
-                lightbox.querySelector('img').src = images[currentIndex].src;
+                lightbox.querySelector('img').src = images[currentIndex];
             });
             
             lightbox.querySelector('.lightbox-close').addEventListener('click', () => {
