@@ -73,7 +73,7 @@ class Jaroncito_ElementAddons {
     
         // Register custom scripts
         wp_register_script( 'jaroncito-elementaddons-js', plugins_url( '/assets/js/elementaddons.js', __FILE__ ), [ 'jquery' ], self::VERSION, true );
-        wp_register_script( 'jaroncito-product-gallery-js', plugins_url( '/assets/js/product-gallery.js', __FILE__ ), [ 'jquery' ], self::VERSION, true );
+        wp_register_script( 'jaroncito-product-gallery-js', plugins_url( '/assets/js/product-gallery.js', __FILE__ ), [ 'jquery', 'swiper-js' ], self::VERSION, true );
     
         // Register custom styles
         wp_register_style( 'jaroncito-elementaddons-css', plugins_url( '/assets/css/elementaddons.css', __FILE__ ), [], self::VERSION );
