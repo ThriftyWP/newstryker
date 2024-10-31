@@ -45,8 +45,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Add navigation button functionality for main image (MOVED OUTSIDE LIGHTBOX)
-    const nextButton = document.querySelector('.swiper-button-next');
-    const prevButton = document.querySelector('.swiper-button-prev');
+    const nextButton = document.querySelector('.main-image-next');
+    const prevButton = document.querySelector('.main-image-prev');
     const mainImage = document.querySelector('.jaroncito-main-product-image');
     const thumbnails = Array.from(document.querySelectorAll('.jaroncito-gallery-item img'));
     let currentMainIndex = 0;
