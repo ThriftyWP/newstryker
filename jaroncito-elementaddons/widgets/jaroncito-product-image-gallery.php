@@ -74,6 +74,18 @@ class Jaroncito_ElementAddons_Jaroncito_Product_Image_Gallery_Widget extends \El
             ]
         );
 
+        $this->add_control(
+            'enable_lightbox',
+            [
+                'label' => __('Enable Lightbox', 'jaroncito-elementaddons'),
+                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'label_on' => __('Yes', 'jaroncito-elementaddons'),
+                'label_off' => __('No', 'jaroncito-elementaddons'),
+                'return_value' => 'yes',
+                'default' => 'yes',
+            ]
+        );
+
         $this->end_controls_section();
     }
 
@@ -145,9 +157,13 @@ class Jaroncito_ElementAddons_Jaroncito_Product_Image_Gallery_Widget extends \El
         <# if ( settings.images && settings.images.length ) { #>
         <div class="jaroncito-product-gallery-container">
             <div class="jaroncito-main-image-container">
-                <div class="jaroncito-main-image">
-                    <img src="{{ settings.images[0].url }}" alt="{{ settings.images[0].id }}" class="jaroncito-main-product-image">
-                </div>
+            <div class="jaroncito-main-image">
+                <img src="{{ settings.images[0].url }}" 
+                    alt="{{ settings.images[0].id }}" 
+                    class="jaroncito-main-product-image"
+                    data-lightbox="{{ settings.enable_lightbox }}"
+                    data-index="0">
+            </div>
             </div>
             <div class="jaroncito-gallery-carousel-container">
                 <div class="jaroncito-gallery-carousel swiper-container" data-images-per-view="{{ settings.images_per_view }}" data-slides-to-scroll="{{ settings.slides_to_scroll }}">
