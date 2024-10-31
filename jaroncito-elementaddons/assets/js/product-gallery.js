@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error('Swiper library is not loaded.');
         return;
     }
+    console.log('Swiper version:', Swiper.version);
 
     var swiperContainer = document.querySelector('.jaroncito-gallery-carousel');
     if (!swiperContainer) return;
