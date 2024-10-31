@@ -133,6 +133,9 @@ class Jaroncito_ElementAddons_Jaroncito_Product_Image_Gallery_Widget extends \El
         } elseif ( ! empty( $settings['images'] ) ) {
             echo '<img src="' . esc_url( $settings['images'][0]['url'] ) . '" alt="' . esc_attr( $settings['images'][0]['id'] ) . '" class="jaroncito-main-product-image">';
         }
+        // Added navigation buttons for main image
+        echo '<button class="main-image-prev">&lt;</button>';
+        echo '<button class="main-image-next">&gt;</button>';
         echo '</div>';
         echo '</div>';
 
@@ -141,7 +144,7 @@ class Jaroncito_ElementAddons_Jaroncito_Product_Image_Gallery_Widget extends \El
         echo '<div class="swiper-wrapper">';
         foreach ( $attachment_ids as $index => $attachment_id ) {
             if ( 'yes' === $settings['dynamic_product_images'] ) {
-                if ( $index === 0 ) continue; // Skip the main product image if it is part of the gallery
+                if ( $index === 0 ) continue;
                 echo '<div class="swiper-slide jaroncito-gallery-item">';
                 echo wp_get_attachment_image( $attachment_id, 'thumbnail', false, [ 'class' => 'jaroncito-gallery-thumbnail' ] );
                 echo '</div>';
@@ -152,13 +155,13 @@ class Jaroncito_ElementAddons_Jaroncito_Product_Image_Gallery_Widget extends \El
                 echo '</div>';
             }
         }
-        echo '</div>'; // End of .swiper-wrapper
-        echo '<div class="swiper-button-next"></div>'; // Navigation next button
-        echo '<div class="swiper-button-prev"></div>'; // Navigation prev button
-        echo '<div class="swiper-pagination"></div>'; // Pagination
-        echo '</div>'; // End of .swiper-container
-        echo '</div>'; // End of .jaroncito-gallery-carousel-container
-        echo '</div>'; // End of .jaroncito-product-gallery-container
+        echo '</div>';
+        echo '<div class="swiper-button-next"></div>';
+        echo '<div class="swiper-button-prev"></div>';
+        echo '<div class="swiper-pagination"></div>';
+        echo '</div>';
+        echo '</div>';
+        echo '</div>';
     }
 
     protected function content_template() {
@@ -166,13 +169,16 @@ class Jaroncito_ElementAddons_Jaroncito_Product_Image_Gallery_Widget extends \El
         <# if ( settings.images && settings.images.length ) { #>
         <div class="jaroncito-product-gallery-container">
             <div class="jaroncito-main-image-container">
-            <div class="jaroncito-main-image">
-                <img src="{{ settings.images[0].url }}" 
-                    alt="{{ settings.images[0].id }}" 
-                    class="jaroncito-main-product-image"
-                    data-lightbox="{{ settings.enable_lightbox }}"
-                    data-index="0">
-            </div>
+                <div class="jaroncito-main-image">
+                    <img src="{{ settings.images[0].url }}" 
+                        alt="{{ settings.images[0].id }}" 
+                        class="jaroncito-main-product-image"
+                        data-lightbox="{{ settings.enable_lightbox }}"
+                        data-index="0">
+                    <!-- Added navigation buttons for main image -->
+                    <button class="main-image-prev">&lt;</button>
+                    <button class="main-image-next">&gt;</button>
+                </div>
             </div>
             <div class="jaroncito-gallery-carousel-container">
                 <div class="jaroncito-gallery-carousel swiper-container" data-images-per-view="{{ settings.images_per_view }}" data-slides-to-scroll="{{ settings.slides_to_scroll }}">
@@ -195,4 +201,3 @@ class Jaroncito_ElementAddons_Jaroncito_Product_Image_Gallery_Widget extends \El
         <?php
     }
 }
-
