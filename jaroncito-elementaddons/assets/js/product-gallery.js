@@ -44,3 +44,39 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+// Lightbox functionality
+const mainImage = document.querySelector('.jaroncito-main-product-image');
+if (mainImage && mainImage.dataset.lightbox === 'yes') {
+    mainImage.addEventListener('click', function() {
+        const lightbox = document.createElement('div');
+        lightbox.className = 'jaroncito-lightbox';
+        lightbox.innerHTML = `
+            <div class="lightbox-content">
+                <img src="${this.src}" alt="${this.alt}">
+                <button class="lightbox-prev">&lt;</button>
+                <button class="lightbox-next">&gt;</button>
+                <button class="lightbox-close">&times;</button>
+            </div>
+        `;
+        document.body.appendChild(lightbox);
+        
+        // Handle navigation
+        const images = Array.from(document.querySelectorAll('.jaroncito-gallery-thumbnail'));
+        let currentIndex = parseInt(this.dataset.index);
+        
+        lightbox.querySelector('.lightbox-next').addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % images.length;
+            lightbox.querySelector('img').src = images[currentIndex].src;
+        });
+        
+        lightbox.querySelector('.lightbox-prev').addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            lightbox.querySelector('img').src = images[currentIndex].src;
+        });
+        
+        lightbox.querySelector('.lightbox-close').addEventListener('click', () => {
+            lightbox.remove();
+        });
+    });
+}
