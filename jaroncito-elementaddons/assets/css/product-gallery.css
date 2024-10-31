@@ -99,3 +99,22 @@
 .lightbox-prev { left: 20px; top: 50%; }
 .lightbox-next { right: 20px; top: 50%; }
 .lightbox-close { right: 20px; top: 20px; }
+.main-image-prev,
+.main-image-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.main-image-prev { left: 10px; }
+.main-image-next { right: 10px; }
+
+.jaroncito-main-image {
+    position: relative;
+}
