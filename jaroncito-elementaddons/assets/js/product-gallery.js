@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var slidesToScroll = parseInt(swiperContainer.dataset.slidesToScroll, 10) || 1;
 
     // Initialize Swiper
-    var gallerySwiper = new Swiper('.jaroncito-gallery-carousel', {
+    var gallerySwiper = new Swiper('.jaroncito-gallery-carousel.swiper-container', {
         loop: false,
         navigation: {
             nextEl: '.swiper-button-next',
