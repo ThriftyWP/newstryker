@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
     }
 
-    var swiperContainer = document.querySelector('.swiper-container');
+    var swiperContainer = document.querySelector('.jaroncito-gallery-carousel');
     if (!swiperContainer) return;
 
     // Get configuration from data attributes
@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var slidesToScroll = parseInt(swiperContainer.dataset.slidesToScroll, 10) || 1;
 
     // Initialize Swiper
-    var gallerySwiper = new Swiper('.swiper-container', {
+    var gallerySwiper = new Swiper('.jaroncito-gallery-carousel', {
         loop: false,
         navigation: {
             nextEl: '.swiper-button-next',
