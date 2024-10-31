@@ -120,7 +120,16 @@ class Jaroncito_ElementAddons_Jaroncito_Product_Image_Gallery_Widget extends \El
         echo '<div class="jaroncito-main-image-container">';
         echo '<div class="jaroncito-main-image">';
         if ( isset( $main_image_id ) && 'yes' === $settings['dynamic_product_images'] ) {
-            echo wp_get_attachment_image( $main_image_id, 'full', false, [ 'class' => 'jaroncito-main-product-image' ] );
+            echo wp_get_attachment_image( 
+                $main_image_id, 
+                'full', 
+                false, 
+                [
+                    'class' => 'jaroncito-main-product-image',
+                    'data-lightbox' => $settings['enable_lightbox'],
+                    'data-index' => '0'
+                ]
+            );
         } elseif ( ! empty( $settings['images'] ) ) {
             echo '<img src="' . esc_url( $settings['images'][0]['url'] ) . '" alt="' . esc_attr( $settings['images'][0]['id'] ) . '" class="jaroncito-main-product-image">';
         }
