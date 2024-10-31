@@ -29,7 +29,7 @@ class Jaroncito_ElementAddons_Jaroncito_Product_Image_Gallery_Widget extends \El
         return [ 'swiper-css', 'product-gallery-css' ];
     }
 
-    protected function _register_controls() {
+    protected function register_controls() {
         $this->start_controls_section(
             'content_section',
             [
@@ -140,7 +140,7 @@ class Jaroncito_ElementAddons_Jaroncito_Product_Image_Gallery_Widget extends \El
         echo '</div>'; // End of .jaroncito-product-gallery-container
     }
 
-    protected function _content_template() {
+    protected function content_template() {
         ?>
         <# if ( settings.images && settings.images.length ) { #>
         <div class="jaroncito-product-gallery-container">
@@ -171,12 +171,3 @@ class Jaroncito_ElementAddons_Jaroncito_Product_Image_Gallery_Widget extends \El
     }
 }
 
-add_action( 'wp_enqueue_scripts', function() {
-    // Enqueue Swiper.js and Swiper.css
-    wp_enqueue_script( 'swiper-js', 'https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js', [], '9.0.0', true );
-    wp_enqueue_style( 'swiper-css', 'https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css', [], '9.0.0' );
-
-    // Enqueue custom CSS and JS files
-    wp_enqueue_style( 'jaroncito-product-gallery-css', plugins_url( '/assets/css/product-gallery.css', __FILE__ ), [], '1.0.0' );
-    wp_enqueue_script( 'jaroncito-product-gallery-js', plugins_url( '/assets/js/product-gallery.js', __FILE__ ), [ 'swiper-js' ], '1.0.0', true );
-});
