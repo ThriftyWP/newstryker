@@ -59,6 +59,32 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             `;
             document.body.appendChild(lightbox);
+
+            // Add keyboard navigation
+            const handleKeyboard = (e) => {
+                switch(e.key) {
+                    case 'ArrowRight':
+                        currentIndex = (currentIndex + 1) % images.length;
+                        lightbox.querySelector('img').src = images[currentIndex];
+                        break;
+                    case 'ArrowLeft':
+                        currentIndex = (currentIndex - 1 + images.length) % images.length;
+                        lightbox.querySelector('img').src = images[currentIndex];
+                        break;
+                    case 'Escape':
+                        lightbox.remove();
+                        document.removeEventListener('keydown', handleKeyboard);
+                        break;
+                }
+            };
+
+            document.addEventListener('keydown', handleKeyboard);
+
+            // Make sure to remove the event listener when closing the lightbox
+            lightbox.querySelector('.lightbox-close').addEventListener('click', () => {
+                lightbox.remove();
+                document.removeEventListener('keydown', handleKeyboard);
+            });
             
             // Handle navigation
             const images = Array.from(document.querySelectorAll('.jaroncito-gallery-item img')).map(img => img.src);
