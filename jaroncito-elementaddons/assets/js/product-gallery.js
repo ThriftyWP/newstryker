@@ -6,6 +6,19 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     console.log('Swiper version:', Swiper.version);
 
+    // Initialize main gallery slider
+    const gallerySlider = new Swiper('.jaroncito-gallery-slider', {
+        slidesPerView: 1,
+        spaceBetween: 30,
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        loop: true,
+        effect: 'slide',
+    });
+
+
     var swiperContainer = document.querySelector('.jaroncito-gallery-carousel');
     if (!swiperContainer) return;
 
