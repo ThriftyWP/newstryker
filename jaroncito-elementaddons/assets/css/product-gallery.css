@@ -118,3 +118,24 @@
 .jaroncito-main-image {
     position: relative;
 }
+
+.jaroncito-gallery-container {
+    position: relative;
+    width: 100%;
+}
+
+.jaroncito-gallery-slider {
+    width: 100%;
+    overflow: hidden;
+}
+
+.jaroncito-gallery-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+    color: #000;
+}
