@@ -91,77 +91,69 @@ class Jaroncito_ElementAddons_Jaroncito_Product_Image_Gallery_Widget extends \El
 
     protected function render() {
         $settings = $this->get_settings_for_display();
-
+        
+        // Get product images
         if ( 'yes' === $settings['dynamic_product_images'] ) {
             global $product;
-
             if ( ! is_a( $product, 'WC_Product' ) ) {
                 $product = wc_get_product();
                 if ( ! is_a( $product, 'WC_Product' ) ) {
                     return;
                 }
             }
-
             $attachment_ids = $product->get_gallery_image_ids();
             $main_image_id = $product->get_image_id();
         } else {
             $attachment_ids = $settings['images'] ?? [];
             $main_image_id = ! empty( $attachment_ids ) ? $attachment_ids[0]['id'] : null;
         }
-
+    
         if ( empty( $attachment_ids ) ) {
             return;
         }
-
-        $images_per_view = $settings['images_per_view'];
-        $slides_to_scroll = $settings['slides_to_scroll'];
-
-        echo '<div class="jaroncito-product-gallery-container">';
-        echo '<div class="jaroncito-main-image-container">';
-        echo '<div class="jaroncito-main-image">';
+    
+        // Start gallery container
+        echo '<div class="jaroncito-gallery-container">';
+        
+        // Main slider
+        echo '<div class="jaroncito-gallery-slider swiper-container">';
+        echo '<div class="swiper-wrapper">';
+        
+        // Add main image
         if ( isset( $main_image_id ) && 'yes' === $settings['dynamic_product_images'] ) {
+            echo '<div class="swiper-slide">';
             echo wp_get_attachment_image( 
                 $main_image_id, 
                 'full', 
                 false, 
                 [
-                    'class' => 'jaroncito-main-product-image',
+                    'class' => 'jaroncito-gallery-image',
                     'data-lightbox' => $settings['enable_lightbox'],
                     'data-index' => '0'
                 ]
             );
-        } elseif ( ! empty( $settings['images'] ) ) {
-            echo '<img src="' . esc_url( $settings['images'][0]['url'] ) . '" alt="' . esc_attr( $settings['images'][0]['id'] ) . '" class="jaroncito-main-product-image">';
+            echo '</div>';
         }
-        // Added navigation buttons for main image
-        echo '<button class="main-image-prev">&lt;</button>';
-        echo '<button class="main-image-next">&gt;</button>';
-        echo '</div>';
-        echo '</div>';
-
-        echo '<div class="jaroncito-gallery-carousel-container">';
-        echo '<div class="jaroncito-gallery-carousel swiper-container" data-images-per-view="' . esc_attr( $images_per_view ) . '" data-slides-to-scroll="' . esc_attr( $slides_to_scroll ) . '">';
-        echo '<div class="swiper-wrapper">';
+    
+        // Add gallery images
         foreach ( $attachment_ids as $index => $attachment_id ) {
+            echo '<div class="swiper-slide">';
             if ( 'yes' === $settings['dynamic_product_images'] ) {
-                if ( $index === 0 ) continue;
-                echo '<div class="swiper-slide jaroncito-gallery-item">';
-                echo wp_get_attachment_image( $attachment_id, 'thumbnail', false, [ 'class' => 'jaroncito-gallery-thumbnail' ] );
-                echo '</div>';
+                echo wp_get_attachment_image( $attachment_id, 'full', false, ['class' => 'jaroncito-gallery-image'] );
             } else {
-                if ( $index === 0 ) continue;
-                echo '<div class="swiper-slide jaroncito-gallery-item">';
-                echo '<img src="' . esc_url( $attachment_id['url'] ) . '" alt="' . esc_attr( $attachment_id['id'] ) . '" class="jaroncito-gallery-thumbnail">';
-                echo '</div>';
+                echo '<img src="' . esc_url( $attachment_id['url'] ) . '" alt="' . esc_attr( $attachment_id['id'] ) . '" class="jaroncito-gallery-image">';
             }
+            echo '</div>';
         }
-        echo '</div>';
-        echo '<div class="swiper-button-next"></div>';
+        
+        echo '</div>'; // End swiper-wrapper
+        
+        // Navigation
         echo '<div class="swiper-button-prev"></div>';
-        echo '<div class="swiper-pagination"></div>';
-        echo '</div>';
-        echo '</div>';
-        echo '</div>';
+        echo '<div class="swiper-button-next"></div>';
+        
+        echo '</div>'; // End gallery slider
+        echo '</div>'; // End gallery container
     }
 
     protected function content_template() {
